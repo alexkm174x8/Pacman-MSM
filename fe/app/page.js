@@ -14,7 +14,7 @@ export default function Home() {
       .then(res => res.json())
       .then(res => {
         setPosX(res.agents[0].pos[0]-1);
-        setPosX(res.agents[0].pos[1]-1);
+        setPosY(res.agents[0].pos[1]-1);
       });
     }, 1000);
 
