@@ -50,7 +50,7 @@ export default function Home() {
             <rect x={250 + 24 * rowidx} y={5 + 24 * colidx} width={24} height={24} fill={value == 1 ? "lightgray" : "gray"}/>
       ))
       }
-      <image x={255 + 24 * posX} y={9 + 24 * posY} href="ghost.png"/>
+      <image x={250 + 24 * posX} y={5 + 24 * posY} href="ghost.png"/>
       </svg>
     </div>
   );
