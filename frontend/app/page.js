@@ -1,12 +1,12 @@
-"use client"
+"use client" // hace que se ejecute en el navegador
 import styles from "./page.module.css";
 //import { useState } from "react";
 import React, { useEffect, useState } from 'react';
 
 
 export default function Home() {
-  const [posX, setPosX] = useState(6);
-  const [posY, setPosY] = useState(8);
+  const [posX, setPosX] = useState(6); // indica la posición inicial
+  const [posY, setPosY] = useState(8); 
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -46,7 +46,7 @@ export default function Home() {
       <div>
         <svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
         {
-          matrix.map((row, rowidx) =>
+          matrix.map((row, rowidx) => // crea las celdas
             row.map((value, colidx) =>
               <rect x={250 + 25 * colidx} y={5 + 25 * rowidx} width={25} height={25} fill={value == 1 ? "lightgray" : "gray"}/>
         ))
