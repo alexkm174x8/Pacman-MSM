@@ -17,3 +17,4 @@ end
 
 model = initialize_model()
 a = add_agent!(Ghost, pos=(3, 3), model)
+#prueba
