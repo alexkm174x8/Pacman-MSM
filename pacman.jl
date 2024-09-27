@@ -1,11 +1,7 @@
 using Agents
-using CairoMakie # Librería de gráficos
+using CairoMakie
 
-@agent struct Ghost(GridAgent{2}) # Define la estructura 2D ghost 
-    type::String = "Ghost"
-end
-
-matrix = [ # 14 x 17
+matrix = [
     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
     0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0;
     0 1 0 1 0 0 0 1 1 1 0 1 0 1 0 1 0;
@@ -22,15 +18,43 @@ matrix = [ # 14 x 17
     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 ]
 
-function agent_step!(agent, model) # movimiento aleatorio del agente
-    randomwalk!(agent, model)
+movimientos = [
+    (0, 1),  
+    (1, 0),  
+    (0, -1), 
+    (-1, 0)  
+]
+movimientos_v = []
+
+@agent struct Ghost(GridAgent{2})
+    type::String = "Ghost"
 end
 
-function initialize_model() # Constrye el tablero con cuadros de 5 x 5, Crea el ghost y les dice como moverse
-    space = GridSpace((5,5); periodic = false, metric = :manhattan)
+function agent_step!(agent, model)
+    movimientos_v = []
+
+    for move in movimientos
+        (dx, dy) = move
+        (x, y) = agent.pos .+ (dx, dy)
+
+        if 1 <= x <= size(matrix, 1) && 1 <= y <= size(matrix, 2) && matrix[x, y] == 1
+            push!(movimientos_v, (dx, dy)) 
+        end
+    end
+
+    if !isempty(movimientos_v)
+        move = rand(movimientos_v)
+        (dx, dy) = move
+        new_pos = (agent.pos[1] + dx, agent.pos[2] + dy) 
+        move_agent!(agent, new_pos, model)
+    end
+end
+
+function initialize_model()
+    space = GridSpace((13, 17); periodic = false, metric = :manhattan)
     model = StandardABM(Ghost, space; agent_step!)
     return model
 end
 
 model = initialize_model()
-a = add_agent!(Ghost, pos=(3, 3), model) # Añade el ghost en la posición 3,3
+a = add_agent!(Ghost, pos=(9, 9), model)
