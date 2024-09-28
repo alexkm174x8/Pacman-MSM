@@ -47,10 +47,12 @@ export default function Home() {
       {
         matrix.map((row, rowidx) =>
           row.map((value, colidx) =>
-            <rect x={250 + 24 * rowidx} y={5 + 24 * colidx} width={24} height={24} fill={value == 1 ? "lightgray" : "gray"}/>
+            <rect x={250 + 24 * rowidx} y={5 + 24 * colidx} width={24} height={24} fill={value == 1 ? "black" : "darkblue"}/>
       ))
       }
       <image x={250 + 24 * posX} y={5 + 24 * posY} href="ghost.png"/>
+      <image x={250 + 24 * 1} y={5 + 24 * 1} href="pacman.png"/>
+      
       </svg>
     </div>
   );
