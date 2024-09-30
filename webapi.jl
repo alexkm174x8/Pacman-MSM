@@ -3,13 +3,17 @@ using Genie, Genie.Renderer.Json, Genie.Requests, HTTP
 using UUIDs
 
 route("/run") do
-    run!(model, 1)
-    agents = []
-    for ghost in allagents(model)
-        push!(agents, ghost)
-    end
+  run!(model, 1)  # Avanza un paso en la simulación
+  agents = []
+  for ghost in allagents(model)
+      push!(agents, Dict(
+          "id" => string(ghost.id),
+          "pos" => ghost.pos,
+          "type" => ghost.type
+      ))
+  end
 
-    json(Dict(:msg => "Adios", "agents" => agents))
+  json(Dict(:msg => "Actualización de agentes", "agents" => agents))
 end
 
 Genie.config.run_as_server = true
