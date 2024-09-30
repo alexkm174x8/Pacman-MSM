@@ -49,7 +49,7 @@ export default function Home() {
           matrix.map((row, rowidx) =>
             row.map((value, colidx) =>
               <rect 
-                key={`${rowidx}-${colidx}`}
+                key={`${colidx}-${rowidx}`}
                 x={250 + 24 * colidx} 
                 y={5 + 24 * rowidx} 
                 width={24} 
